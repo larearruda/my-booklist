@@ -36,9 +36,10 @@ module.exports.insertInitialData = () => {
     return new Promise((resolve, reject) => {
         let datetime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
         let bookTable = `
-            INSERT INTO book (title, author, datecreated) VALUES
-            ('Lord of the Rings', 'J. R. R. Tolkien', '${datetime}'),
-            ('Harry Potter', 'J. K. Rowling', '${datetime}')
+            INSERT INTO book (title, author, datecreated, status) VALUES
+            ('Lord of the Rings', 'J. R. R. Tolkien', '${datetime}', 'todo'),
+            ('Harry Potter and the Cursed Child', 'J. K. Rowling', '${datetime}', 'doing'),
+            ('Twilight', 'J. K. Rowling', '${datetime}', 'done')
             ;
         `;
         

@@ -1,2 +1,17 @@
 api/node_modules/
 api/package-lock.json
+
+# dependencies
+my-booklist-webpage/node_modules/
+my-booklist-webpage/.pnp
+my-booklist-webpage.pnp.js
+
+# testing
+my-booklist-webpage/coverage
+
+# production
+my-booklist-webpage/build
+
+my-booklist-webpage/npm-debug.log*
+my-booklist-webpage/yarn-debug.log*
+my-booklist-webpage/yarn-error.log*

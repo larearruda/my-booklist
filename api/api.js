@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 database.setupDatabase();
-database.insertInitialData();
+// database.insertInitialData();
 
 app.listen(port, () => {
     console.log(`My Booklist is up and running @ http://localhost:${port}`);
@@ -40,13 +40,10 @@ app.post('/books', (req, res) => {
         console.error('Error at post /books');
         res.status(500).send(err);
     });
-    // let rows = database.getAllBooks();
-    // res.status(200).send('api post');
 });
 
-app.put('/books/:id', (req, res) => {
+app.put('/books', (req, res) => {
     console.log('put/update', req.body);
-    // let rows = database.getAllBooks();
     res.status(200).send('api update');
 });
 
@@ -61,5 +58,4 @@ app.delete('/books/:id', (req, res) => {
         console.error('Error at post /books');
         res.status(500).send(err);
     });
-    // res.status(200).send('api delete');
 });

@@ -6,7 +6,7 @@ const ApiHttp = axios.create({
         'http://localhost:3001/',
 });
 
-export const getAllBooks = async (): Promise<any> => {
+export const getAllBooks = async (): Promise<Book[]> => {
     const response = await ApiHttp.get('/books',
       {headers: {'Content-type': 'application/json'}},
     );
@@ -20,11 +20,11 @@ export const getAllBooks = async (): Promise<any> => {
 
         return books;
     } else {
-        throw 'Error api do not response the expected' + response;
+        throw 'Error api did not respond as expected' + response;
     }
 };
 
-export const addBook = async (book: Object): Promise<any> => {
+export const addBook = async (book: Book): Promise<any> => {
     const response = await ApiHttp.post('/books',
         {book},
         {headers: {'Content-type': 'application/json'}},
@@ -33,19 +33,32 @@ export const addBook = async (book: Object): Promise<any> => {
     if (response.status === 200) {
         return {sucess: true};
     } else {
-        throw 'Error api do not response the expected' + response;
+        throw 'Error api did not respond as expected' + response;
     }
 }
 
-export const deleteBookBy = async (id: string): Promise<any> => {
-    const response = await ApiHttp.post('/books',
-        {id},
+export const updateBook = async (book: Book): Promise<any> => {
+    const response = await ApiHttp.put('/books',
+        {book},
         {headers: {'Content-type': 'application/json'}},
     );
 
     if (response.status === 200) {
         return {sucess: true};
     } else {
-        throw 'Error api do not response the expected' + response;
+        throw 'Error api did not respond as expected' + response;
+    }
+}
+
+
+export const deleteBookById = async (id: number): Promise<any> => {
+    const response = await ApiHttp.delete('/books/' + id,
+        {headers: {'Content-type': 'application/json'}},
+    );
+
+    if (response.status === 200) {
+        return {sucess: true};
+    } else {
+        throw 'Error api did not respond as expected' + response;
     }
 }
