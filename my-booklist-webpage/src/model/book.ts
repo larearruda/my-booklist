@@ -4,6 +4,6 @@ export interface Book {
     author: string;
     datecreated?: string;
     datecompleted?: string;
-    score?: string,
+    score?: number,
     status: string,
 }
