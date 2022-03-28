@@ -44,7 +44,13 @@ app.post('/books', (req, res) => {
 
 app.put('/books', (req, res) => {
     console.log('put/update', req.body);
-    res.status(200).send('api update');
+    let data = database.updateBook(req.body.book);
+    data.then(result => {
+        res.status(200).send(result);
+    }).catch(err => {
+        console.error('Error at put /books');
+        res.status(500).send(err);
+    });
 });
 
 

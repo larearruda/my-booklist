@@ -73,6 +73,19 @@ module.exports.insertNewBook = (book) => {
     });
 }
 
+module.exports.updateBook = (book) => {
+    return new Promise((resolve, reject) => {
+        connection.query(
+            'UPDATE book SET ? WHERE id = ' + book.id, 
+            book, 
+            (err,rows) => {
+            if(err) reject(err);
+
+            resolve(rows);
+          });
+    });
+}
+
 
 module.exports.deleteBookById = (id) => {
     return new Promise((resolve, reject) => {

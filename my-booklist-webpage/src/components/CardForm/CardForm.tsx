@@ -20,7 +20,7 @@ const CardForm: React.FunctionComponent<CardFormProps> = ({setShowForm, isUpdate
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [status, setStatus] = useState('');
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState('');
 
   const dispatch = useDispatch();
 
@@ -34,7 +34,7 @@ const CardForm: React.FunctionComponent<CardFormProps> = ({setShowForm, isUpdate
       setTitle(book.title);
       setAuthor(book.author);
       setStatus(book.status);
-      setScore(book.score ? book.score : 0);
+      setScore(book.score + '');
     }
   }
   
@@ -44,13 +44,14 @@ const CardForm: React.FunctionComponent<CardFormProps> = ({setShowForm, isUpdate
       author: author,
       status: status,
       datecreated: getDateTimeFormat(),
-      score: score,
+      score: score + '',
     };
     console.log(JSON.stringify(book));
     const response = await addBook(insertBook);
-    console.log('submeter form', response);
-    reloadBookList();
-    setShowForm()
+    if(response.sucess) { 
+      reloadBookList();
+      setShowForm();
+    }
   }
 
   const onUpdate = async () => {
@@ -59,8 +60,8 @@ const CardForm: React.FunctionComponent<CardFormProps> = ({setShowForm, isUpdate
       title: title,
       author: author,
       status: status,
-      datecreated: book?.datecreated,
-      score: score,
+      datecreated: book?.datecreated?.replace(/T/, ' ').replace(/\..+/, ''),
+      score: score + '',
       datecompleted: getDateTimeFormat(),
     };
     console.log(JSON.stringify(book));
@@ -122,7 +123,7 @@ const CardForm: React.FunctionComponent<CardFormProps> = ({setShowForm, isUpdate
           type="number"
           placeholder='Nota'
           value={score}
-          onChange={e => setScore(parseInt(e.target.value))}
+          onChange={e => setScore(e.target.value)}
           hidden={status !== 'done'} 
         />
       </InputRow>
